@@ -5,7 +5,7 @@
       :key="`${key}-${index}`"
       class="dt-cell"
     >
-      <div v-if="key === 'selected'">
+      <div v-if="`${key}` === 'selected'">
         <input type="checkbox"/>
       </div>
       <div v-else>
@@ -23,9 +23,9 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { DatatableRow } from "./types";
+import { IDatatableRow } from "./types";
 
 const props = defineProps<{
-  row: DatatableRow;
+  row: IDatatableRow;
 }>();
 </script>

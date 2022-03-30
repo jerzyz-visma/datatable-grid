@@ -35,28 +35,28 @@ const props = defineProps<{
 provide("columns", props.columns);
 
 const gridRef = ref<HTMLElement | null>(null);
-const thRefs = ref<NodeListOf<HTMLElement>>();
+const thRefs = ref<HTMLElement[] | null>(null);
 const columnsSize = ref<IColumnSize[] | null>(null);
 
-const minColWidth = 120;
-const columnTypeToRatioMap: Record<string, number> = {
-  "checkbox": 1,
-  "numeric": 1,
-  "text-short": 1.67,
-  "text-long": 3.33,
+const minColWidth = 50;
+const columnTypeToRatioMap: Record<string, string> = {
+  "checkbox": "50px",
+  "numeric": "100px",
+  "text-short": "1.67fr",
+  "text-long": "3.33fr",
 }
 
 onMounted(() => {
-  thRefs.value =  gridRef.value?.querySelectorAll('.dt-th')
+  thRefs.value =  [].slice.call(gridRef.value!.getElementsByClassName('dt-th'))
 
+  // Set default minmax size based on column's config type
   columnsSize.value = props.columns.map((col: IDatatableColumn, index) => (
     {
-      th: thRefs.value[index],
-      size: `minmax(${minColWidth}px, ${columnTypeToRatioMap[col.config.type] + 'fr'})`
+      th: thRefs.value?.[index],
+      size: `minmax(${minColWidth}px, ${columnTypeToRatioMap[col.config.type]})`
     }
   ))
-
-  gridRef.value.style.gridTemplateColumns =  gridSize(columnsSize.value)
+  gridRef.value!.style.gridTemplateColumns =  gridSize(columnsSize.value)
 })
 
 const gridSize = (columnsSize: IColumnSize[]) => {
@@ -77,6 +77,8 @@ const initResize = (e: IResizeEvent) => {
 
 const onMouseMove = (e: MouseEvent) => {
   // Calculate the desired width
+  if (!gridRef.value) return false
+
   const horizontalScrollOffset = document.documentElement.scrollLeft;
   const width = (horizontalScrollOffset + e.clientX - gridRef.value?.offsetLeft) - resizedHeader.value?.offsetLeft;
 
@@ -86,25 +88,25 @@ const onMouseMove = (e: MouseEvent) => {
 
   // For other th which don't have a set width, fix it to their computed width
   columnsSize.value!.forEach((column: IColumnSize) => {
-    if (column.size.startsWith('minmax')) {
+    if (column.th && column.size.startsWith('minmax') ) {
       // isn't fixed yet it would be a pixel value otherwise
       column.size = `${column.th.clientWidth}px`;
     }
   })
 
   // Make last column take remaining space
-  const tableWidth = gridRef.value.offsetWidth;
-  const colsWidthSum = [...thRefs.value]
+  const tableWidth = gridRef!.value.offsetWidth;
+  const colsWidthSum = [].slice.call(thRefs.value)
     .reduce((accumulator: number, col: HTMLElement) => accumulator + col.offsetWidth, 0);
 
   if (colsWidthSum < tableWidth) {
-    const lastColumnSize = columnsSize.value![columnsSize.value.length - 1].size;
+    const lastColumnSize = columnsSize.value![columnsSize.value!.length - 1].size;
     const availableSpace = tableWidth - colsWidthSum - 2;
 
-    columnsSize.value![columnsSize.value.length - 1].size = `${parseInt(lastColumnSize) + availableSpace}px`
+    columnsSize.value![columnsSize.value!.length - 1].size = `${parseInt(lastColumnSize) + availableSpace}px`
   }
 
-  gridRef.value.style.gridTemplateColumns =  gridSize(columnsSize.value)
+  gridRef.value.style.gridTemplateColumns =  gridSize(columnsSize.value!)
 }
 
 const onMouseUp = () => {

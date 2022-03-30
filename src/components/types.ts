@@ -7,6 +7,7 @@ export interface IDatatableColumn {
     align: string;
     freeze: boolean;
     hidden: boolean;
+    resizable: boolean;
   }
 }
 
@@ -16,7 +17,7 @@ export interface IDatatableRow {
 }
 
 export interface IColumnSize {
-  th: HTMLElement,
+  th?: HTMLElement,
   size: string
 }
 

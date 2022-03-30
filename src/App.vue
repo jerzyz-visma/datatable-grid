@@ -4,13 +4,13 @@ import { IDatatableColumn, IDatatableRow } from "./components/types";
 import { ref } from "vue";
 
 const datatableColumns = ref<IDatatableColumn[]>([
-  { key: 'select', title: 'Select', config: { type: 'checkbox', align: 'left', freeze: true, hidden: false, width: 120 }},
-  { key: 'id', title: 'Id', config: { type: 'numeric', align: 'left', freeze: false, hidden: true, width: 120 }},
-  { key: 'account', title: 'Account', config: { type: 'text-short', align: 'left', freeze: false, hidden: false, width: 120 }},
-  { key: 'name', title: 'Name', config: { type: 'text-short', align: 'left', freeze: false, hidden: false, width: 120 }},
-  { key: 'city', title: 'City', config: { type: 'text-short', align: 'left', freeze: false, hidden: false, width: 120 }},
-  { key: 'country', title: 'Country', config: { type: 'text-short', align: 'left', freeze: false, hidden: false, width: 120 }},
-  { key: 'position', title: 'Position', config: { type: 'text-short', align: 'left', freeze: false, hidden: false, width: 120 }},
+  { key: 'select', title: '', config: { type: 'checkbox', align: 'left', freeze: true, hidden: false, width: 120, resizable: false }},
+  { key: 'id', title: 'Id', config: { type: 'numeric', align: 'left', freeze: false, hidden: true, width: 120, resizable: true }},
+  { key: 'account', title: 'Account', config: { type: 'text-short', align: 'left', freeze: false, hidden: false, width: 120, resizable: true }},
+  { key: 'name', title: 'Name', config: { type: 'text-short', align: 'left', freeze: false, hidden: false, width: 120, resizable: true }},
+  { key: 'city', title: 'City', config: { type: 'text-short', align: 'left', freeze: false, hidden: false, width: 120, resizable: true }},
+  { key: 'country', title: 'Country', config: { type: 'text-short', align: 'left', freeze: false, hidden: false, width: 120, resizable: true }},
+  { key: 'position', title: 'Position', config: { type: 'text-short', align: 'left', freeze: false, hidden: false, width: 120, resizable: true }},
 ]);
 
 const datatableRows = ref<IDatatableRow[]>([

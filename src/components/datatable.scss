@@ -53,6 +53,8 @@
 		}
 		&-select {
 			grid-column: 1 / 2;
+			position: sticky;
+			left: 0;
 		}
 		&-name {
 			color: #4a4a4a;
@@ -60,9 +62,15 @@
 			grid-column: 2 / -2;
 			padding-left: 1rem;
 			text-align: left;
+			position: sticky;
+			left: 49px;
 		}
 		&-action {
 			grid-column: -1 / -2;
+			text-align: right;
+			position: sticky;
+			right: 0;
+			padding-right: var(--cell-pad-x);
 		}
 	}
 

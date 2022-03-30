@@ -7,7 +7,7 @@
       <div class="dt-group-bg dt-group-name">
         Company A
       </div>
-      <div class="dt-group-bg">
+      <div class="dt-group-bg dt-group-action">
         <button @click="collapsed = !collapsed">collapse</button>
       </div>
     </header>

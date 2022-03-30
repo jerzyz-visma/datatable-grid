@@ -4,7 +4,11 @@
     class="dt-th"
   >
     {{ column.title }}
-    <span class="resize-handle" @mousedown="emitResize($event)" />
+    <span
+      v-if="column.config.resizable"
+      class="resize-handle"
+      @mousedown="emitResize()"
+    />
   </div>
 </template>
 
