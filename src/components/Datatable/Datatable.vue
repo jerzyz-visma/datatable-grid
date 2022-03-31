@@ -21,8 +21,8 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import DatatableHead from "./DatatableHead.vue";
-import DatatableBody from "./DatatableBody.vue";
+import DatatableHead from "./components/DatatableHead.vue";
+import DatatableBody from "./components/DatatableBody.vue";
 import { IDatatableColumn, IDatatableRow, IColumnSize, IResizeEvent } from "./types";
 import { onMounted, provide, ref } from "vue";
 

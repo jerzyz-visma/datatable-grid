@@ -78,7 +78,7 @@
 		Datatable commons
 	*****/
 	&-group-body .dt-row {
-		&:nth-child(even) .dt-cell {
+		&:nth-child(even) .dt-td {
 			background: var(--row-alt-bg);
 		}
 	}
@@ -93,9 +93,12 @@
 	}
 
 	&-th,
-	&-cell {
-		padding: var(--cell-pad-y) var(--cell-pad-x);
+	&-td {
 		border-right: 1px solid var(--border-color);
+		padding: var(--cell-pad-y) var(--cell-pad-x);
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 		&:last-of-type {
 			border: none;
 		}

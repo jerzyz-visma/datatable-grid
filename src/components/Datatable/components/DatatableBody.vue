@@ -17,7 +17,7 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { IDatatableColumn, IDatatableRow } from "./types";
+import { IDatatableColumn, IDatatableRow } from "../types";
 import DatatableGroup from "./DatatableGroup.vue";
 import DatatableRow from "./DatatableRow.vue";
 

@@ -19,7 +19,7 @@ export default defineComponent({
 
 <script setup lang="ts">
 import { inject } from "vue";
-import { IDatatableColumn, IResizeEvent } from "./types";
+import { IDatatableColumn, IResizeEvent } from "../types";
 import DatatableTh from "./DatatableTh.vue";
 
 const columns: IDatatableColumn[] | undefined = inject("columns");

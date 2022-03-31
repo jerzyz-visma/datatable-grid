@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Datatable from './components/Datatable.vue'
-import { IDatatableColumn, IDatatableRow } from "./components/types";
+import Datatable from './components/Datatable/Datatable.vue'
+import { IDatatableColumn, IDatatableRow } from "./components/Datatable/types";
 import { ref } from "vue";
 
 const datatableColumns = ref<IDatatableColumn[]>([
@@ -15,8 +15,8 @@ const datatableColumns = ref<IDatatableColumn[]>([
 
 const datatableRows = ref<IDatatableRow[]>([
   { selected: false, id: '1', account: 'account 1', name: 'John Kovalski', city: 'Warsaw', country: 'Poland', position: 'CEO' },
-  { selected: false, id: '2', account: 'account 1', name: 'John Kovalski', city: 'Warsaw', country: 'Poland', position: 'CEO' },
-  { selected: false, id: '3', account: 'account 1', name: 'John Kovalski', city: 'Warsaw', country: 'Poland', position: 'CEO' },
+  { selected: true, id: '2', account: 'account 2', name: 'John Kovalski', city: 'Warsaw', country: 'Poland', position: 'CEO' },
+  { selected: false, id: '3', account: 'account 3', name: 'John Kovalski', city: 'Warsaw', country: 'Poland', position: 'CEO' },
 ])
 </script>
 

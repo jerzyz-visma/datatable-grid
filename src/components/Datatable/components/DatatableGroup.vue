@@ -25,7 +25,7 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { IDatatableRow } from "./types";
+import { IDatatableRow } from "../types";
 import DatatableRow from "./DatatableRow.vue";
 import { ref } from "vue";
 

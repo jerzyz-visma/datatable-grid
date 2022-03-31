@@ -21,7 +21,7 @@ export default defineComponent({
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { IDatatableColumn } from "./types";
+import { IDatatableColumn } from "../types";
 
 const thRef = ref<HTMLElement | null>(null);
 

@@ -3,14 +3,14 @@
     <div
       v-for="(value, key, index) in row"
       :key="`${key}-${index}`"
-      class="dt-cell"
+      class="dt-td"
     >
-      <div v-if="`${key}` === 'selected'">
-        <input type="checkbox"/>
-      </div>
-      <div v-else>
+      <template v-if="`${key}` === 'selected'">
+        <input type="checkbox" :checked="value" />
+      </template>
+      <template v-else>
         {{ value }}
-      </div>
+      </template>
     </div>
   </div>
 </template>
@@ -23,9 +23,15 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { IDatatableRow } from "./types";
+import { IDatatableRow } from "../types";
 
 const props = defineProps<{
   row: IDatatableRow;
 }>();
 </script>
+
+<style lang="scss" scoped>
+.dt-row {
+
+}
+</style>
