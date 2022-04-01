@@ -35,3 +35,9 @@ const emitResize = (e: IResizeEvent) => {
 }
 </script>
 
+<style lang="scss" scoped>
+.dt-head {
+  display: contents;
+}
+</style>
+

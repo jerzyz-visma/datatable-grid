@@ -5,9 +5,12 @@
       ref="gridRef"
       class="dt-grid">
       <DatatableHead @resize="initResize" />
-      <DatatableBody :columns="columns" :rows="rows" />
+      <DatatableBody
+        :columns="columns"
+        :rows="rows"
+      />
       <div class="dt-footer">
-        Footer
+        Total rows: {{ datatableStore.rowsCount }}
       </div>
     </div>
   </main>
@@ -21,18 +24,21 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
+import { useDatatableStore } from "../../stores/DatatableStore";
 import DatatableHead from "./components/DatatableHead.vue";
 import DatatableBody from "./components/DatatableBody.vue";
-import { IDatatableColumn, IDatatableRow, IColumnSize, IResizeEvent } from "./types";
+
+import { IDatatableColumn, IColumnSize, IResizeEvent } from "./types";
 import { onMounted, provide, ref } from "vue";
+import { storeToRefs } from "pinia";
 
-const props = defineProps<{
-  title: string;
-  columns: IDatatableColumn[];
-  rows: IDatatableRow[];
-}>();
 
-provide("columns", props.columns);
+const datatableStore = useDatatableStore();
+const { title, columns, rows } = storeToRefs(useDatatableStore());
+
+datatableStore.fetchRows()
+
+provide("columns", columns);
 
 const gridRef = ref<HTMLElement | null>(null);
 const thRefs = ref<HTMLElement[] | null>(null);
@@ -47,16 +53,16 @@ const columnTypeToRatioMap: Record<string, string> = {
 }
 
 onMounted(() => {
-  thRefs.value =  [].slice.call(gridRef.value!.getElementsByClassName('dt-th'))
+  thRefs.value =  gridRef.value!.getElementsByClassName('dt-th') as any
 
   // Set default minmax size based on column's config type
-  columnsSize.value = props.columns.map((col: IDatatableColumn, index) => (
+  columnsSize.value = columns.value.map((col: IDatatableColumn, index: number) => (
     {
       th: thRefs.value?.[index],
       size: `minmax(${minColWidth}px, ${columnTypeToRatioMap[col.config.type]})`
     }
   ))
-  gridRef.value!.style.gridTemplateColumns =  gridSize(columnsSize.value)
+  gridRef.value!.style.gridTemplateColumns = gridSize(columnsSize.value)
 })
 
 const gridSize = (columnsSize: IColumnSize[]) => {
@@ -117,6 +123,42 @@ const onMouseUp = () => {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "datatable";
+
+.dt {
+  max-width: 1280px;
+  margin: 0 auto;
+  &-grid {
+    border: 1px solid $border-color;
+    display: grid;
+    overflow-x: auto;
+    position: relative;
+    grid-template-columns:
+    repeat(7, minmax($min-col-width, 1fr));
+  }
+
+  &-footer {
+    padding: calc(3* #{$cell-pad-y}) calc(3 * #{$cell-pad-x});
+    background: $tfoot-bg;
+    color: white;
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+
+  :deep(.dt-row) {
+    display: contents;
+  }
+
+  :deep(.dt-cell) {
+    border-right: 1px solid $border-color;
+    padding: $cell-pad-y $cell-pad-x;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    &:last-of-type {
+      border: none;
+    }
+  }
+}
 </style>

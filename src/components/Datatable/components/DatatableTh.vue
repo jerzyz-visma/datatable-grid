@@ -1,7 +1,7 @@
 <template>
   <div
     ref="thRef"
-    class="dt-th"
+    class="dt-cell dt-th"
   >
     {{ column.title }}
     <span
@@ -41,3 +41,34 @@ const emitResize = () => {
   });
 }
 </script>
+
+<style lang="scss" scoped>
+@import "../datatable";
+
+.dt-th {
+  background: $thead-bg;
+  color: white;
+  font-weight: 700;
+  position: relative;
+  &.active-resize {
+    background: $resize-active-bg;
+  }
+}
+
+.resize-handle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: $resize-active-handle;
+  opacity: 0;
+  width: 5px;
+  cursor: col-resize;
+  z-index: 10;
+  overflow: hidden;
+  &:hover {
+    background: $resize-active-handle;
+    opacity: .7;
+  }
+}
+</style>

@@ -1,0 +1,29 @@
+[
+  {
+    "selected": false,
+    "id": "1",
+    "account": "account 1",
+    "name": "John Kovalski",
+    "city": "Warsaw",
+    "country": "Poland",
+    "position": "CEO"
+  },
+  {
+    "selected": true,
+    "id": "2",
+    "account": "account 2",
+    "name": "John Kovalski",
+    "city": "Warsaw",
+    "country": "Poland",
+    "position": "CEO"
+  },
+  {
+    "selected": false,
+    "id": "3",
+    "account": "account 3",
+    "name": "John Kovalski",
+    "city": "Warsaw",
+    "country": "Poland",
+    "position": "CEO"
+  }
+]

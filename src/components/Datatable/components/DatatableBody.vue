@@ -5,6 +5,7 @@
       :rows="rows"
       :collapse="false"
     />
+
 <!--    <DatatableRow v-for="row in rows" :row="row" />-->
   </div>
 </template>
@@ -19,10 +20,15 @@ export default defineComponent({
 <script setup lang="ts">
 import { IDatatableColumn, IDatatableRow } from "../types";
 import DatatableGroup from "./DatatableGroup.vue";
-import DatatableRow from "./DatatableRow.vue";
 
 const props = defineProps<{
   columns: IDatatableColumn[];
   rows: IDatatableRow[];
 }>();
 </script>
+
+<style lang="scss" scoped>
+  .dt-body {
+    display: contents;
+  }
+</style>
